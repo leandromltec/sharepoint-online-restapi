@@ -12,6 +12,7 @@ var URL = _spPageContextInfo.webAbsoluteUrl;
 
 function CarregarComunicado(listName, parametro) {
 
+    //Armazena categoria
     var categoria = "";
 
     var htmlComunicado = [];
