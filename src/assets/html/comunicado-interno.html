@@ -1,0 +1,61 @@
+<!-- Desenvolvido por Leandro M. Loureiro -->
+<!-- Linkedin - www.linkedin.com/in/leandro-loureiro-9921b927 -->
+
+<!-- Página exibie um único Comunicado -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Título do Site</title>
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../assets/css/slick.css">
+	<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+
+	<section class="interna">
+		<div class="container">
+
+
+			<div class="col-md-9 conteudo-interna">
+				<div class="destque-interna">
+
+					<div id="comunicado" class="conteudo-noticia">
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Referencias -->
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="../assets/js/comunicado-interno.js"></script>
+
+	<script>
+
+		$(document).ready(function () {
+
+			//URL do Site
+			var queryStringNoticia = location.search;
+
+		    //Armaznea ID do Comunicado que se encontra na queryString da URL
+			var idComunicado = parseInt(queryStringNoticia.split("ComunicadoID=").pop());
+
+			//Passa o valor da queryString para a variável parametro
+			var parametro = '?$filter=ID eq ' + idComunicado;
+
+			//Função que carrega o comunicado 
+			CarregarComunicado('Comunicados', parametro);
+		});
+
+	</script>
+
+</body>
+
+</html>

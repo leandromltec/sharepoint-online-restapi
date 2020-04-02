@@ -1,0 +1,67 @@
+<!-- Desenvolvido por Leandro M. Loureiro -->
+<!-- Linkedin - www.linkedin.com/in/leandro-loureiro-9921b927 -->
+
+<!-- Página exibie os útimos Comunicados -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Título do Site</title>
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+
+</head>
+
+<body>
+	<section class="interna">
+		<div class="container">
+			<div class="col-md-9 conteudo-interna">
+				<div class="destque-interna">
+					<img src="../assets/images/comunicados/destaque.jpg" alt="{nome da pagina}">
+
+				</div>
+
+				<ul id="comunicados" class="noticias">
+
+				</ul>
+
+				<div class="paginacao">
+					<ul class="pagination">
+						<li class="page-item disabled pag_prev">
+							<a class="page-link" href="#" tabindex="-1">Anterior</a>
+						</li>
+						<li class="page-item pag_next">
+							<a class="page-link" href="#">Próximo</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+
+		</div>
+	</section>
+
+
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+	<script src="../assets/js/paginacao.js"></script>
+	<script src="../assets/js/comunicado.js"></script>
+
+	<script type="text/javascript">
+
+
+		$(document).ready(function () {
+
+			//Parametro define que retorne a 10 itens da lista comunicado ordenado por data
+			var parametro = '?$top=10&$orderby=dataComunicado';
+
+			//Carrega comunicados da lista (10 útlimos) 
+			CarregaComunicados('Comunicados', parametro);
+		});
+
+	</script>
+
+</body>
+
+</html>

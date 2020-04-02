@@ -1,0 +1,145 @@
+<!-- Desenvolvido por Leandro M. Loureiro -->
+<!-- Linkedin - www.linkedin.com/in/leandro-loureiro-9921b927 -->
+
+<!-- Página exibie um única Nóticia com compentes de rede social -->
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Título do Site</title>
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+	<section class="interna">
+		<div class="container">
+
+
+			<div id="titulo-noticias" class="col-md-9 conteudo-interna">
+
+				<div id="noticia" class="conteudo-noticia">
+
+
+				</div>
+				<div class="acoes-noticia">
+					<ul>
+						<li id="gostei">
+
+						</li>
+						<li id="permitir-comentario">
+
+						</li>
+						
+						<li id='controles-redes-sociais'>
+
+						</li>
+					</ul>
+				</div>
+
+				<!-- Adiciona comentário a notícia (Ex: Facebook)-->
+				<div id="area-comentario" class="box-comentario">
+					<h4>Adicionar comentário</h4>
+					<textarea name="" id="comentario" placeholder="Digite um comentário para a notícia..."></textarea>
+					<input type="submit" value="Enviar"
+						onclick="AdicionarComentario('Comentários sobre Notícias');return false;">
+				</div>
+
+				<div id="comentarios" class="cardapio-rj lista-comentarios">
+
+				</div>
+
+
+				<div class="box-noticias-relacionadas">
+					<h5>Notícias Relacionadas</h5>
+					<ul id="noticias-relacionadas" class="noticias">
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<!-- Contém as funções reponsáveis por carregar uma notícia na página (notícia principal)-->
+	<script src="../Style Library/assets/js/noticia-interna.js"></script>
+	<!-- Contém as funções reponsáveis pela página de notícias-->
+	<script src="../Style Library/assets/js/noticias.js"></script>
+	<!-- Realiza paginação a cada 5 notícias -->
+	<script src="../Style Library/assets/js/paginacao.js"></script>
+
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+
+
+			var queryStringNoticia = location.search;
+
+			//Armaznea ID do Notícia que se encontra na queryString da URL
+			var idNoticia = parseInt(queryStringNoticia.split("NoticiaID=").pop());
+
+			//Retorna ID do Usuário Logado
+			var idUsuarioLogado = parseInt(UsuarioLogado());
+
+			//Parametro irá armazenar a busca na lista de coment
+			var parametroComentario = '?$expand=usuario,noticia&$select=comentario,datacomentario,usuario,noticia/ID,' +
+				'usuario/Title,comentario&$filter=noticia/ID eq ' + idNoticia + '&$orderby=datacomentario desc';
+
+			Noticia();
+
+			//Exibe os controles de curtir, compartilhar e comentar (Ex: Facebook)
+			controlesRedesSociais();
+
+
+			
+			//Ao clicar no link compartilharn envia email com a url da notícia
+			$("#link-compartilhar").click(function () {
+
+				//Id da notícia
+				var noticiaId = $(this).attr("data-social-noticiaId");
+				var url = _spPageContextInfo.siteAbsoluteUrl + "Paginas/Noticia-interna.aspx?NoticiaID=" + noticiaId;
+
+				location.href = 'mailto:email para compartilhamento&body=' + url;
+
+				$(this).addClass("active");
+			});
+
+			//Botão gostei ao ser acionado, incluir um curtir na lista de 
+			$(".gostei").on('click', function () {
+
+				//Id do item gostei
+				var idNoticiaGostei = $(this).attr("id");
+				//Quantidade de gostei (curtidas)
+				var countGostei = $(this).attr("value");
+
+				//Título curtir/descurtir
+				var curtirDescurtir = $(this).attr("title");
+
+				//Atualiza o ícone e a lista de Curtidas Sobre Notícias (Ex: Botão curtir do Facebook)
+				AtualizarGostei(idNoticiaGostei, curtirDescurtir, countGostei);
+
+			});
+
+			//Exibi a textarea ao clicar no botão Comentar para que o usuário possa digitar um texto
+			$("#btn-comentar").click(function () {
+
+				$("#area-comentario").show(200);
+			});
+
+
+		});
+
+
+	</script>
+
+
+</body>
+
+</html>

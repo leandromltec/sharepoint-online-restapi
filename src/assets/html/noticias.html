@@ -1,0 +1,91 @@
+<!-- Desenvolvido por Leandro M. Loureiro -->
+<!-- Linkedin - www.linkedin.com/in/leandro-loureiro-9921b927 -->
+
+<!-- Página exibe as últimas notícias -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Título do Site</title>
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../assets/css/slick.css">
+	<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+	<section class="interna">
+		<div class="container">
+
+
+			<div id="titulo-topo" class="col-md-9 conteudo-interna">
+				<div id="interna" class="destaque-interna">
+					<!-- Notícias serão inseridas no ul após a execução do função CarregarNoticias (arquivo noticia.js)-->
+					<ul id="noticias" class="noticias">
+
+					</ul>
+
+					<div id="paginacao" class="paginacao">
+						<ul class="pagination">
+							<li class="page-item disabled pag_prev">
+								<a class="page-link" href="#" tabindex="-1">Anterior</a>
+							</li>
+							<li class="page-item pag_next">
+								<a class="page-link" href="#">Próximo</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+	</section>
+
+
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<!-- Contém as funções reponsáveis pela página de notícias-->
+	<script src="../assets/js/noticias.js"></script>
+	<!-- Realiza paginação a cada 5 notícias -->
+	<script src="../assets/js/paginacao.js"></script>
+
+	<script type="text/javascript">
+
+		//parametro defini máximo de 5 itens ordenado pela data da notícia em ordem decrescente
+		var parametro = '?$top=10&$orderby=dataNoticia desc';
+
+		//Executado ao carregar a página  (JQuery)
+		$(document).ready(function () {
+			
+			//Função carrega as notícias recebendo como parâmtera o nome da lista de Noticias e a variáve parâmetro
+			CarregarNoticias('Noticias', parametro);
+
+		});
+
+		//Aciona a função no momento que é digitado um valor no campo busca
+		$("#busca").keyup(function () {
+
+			//Valor digitado no campo busca
+			var tituloNoticia = $("#busca").val();
+
+			//Caso tenha digitado pelo menos 3 caracteres no campo busca
+			if (tituloNoticia.length >= 3) {
+
+				//Busca Notícias conforme o texto digitado
+				BuscarNoticias('Noticias', parametro, tituloNoticia);
+
+			}
+
+			if (tituloNoticia === "") {
+				CarregarNoticias('Noticias', parametro);
+				$("#paginacao").show();
+
+			}
+
+		});
+
+
+
+	</script>
+
+</body>
+
+</html>
